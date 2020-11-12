@@ -18,16 +18,16 @@
                 }
                 var isIE = !-[1];
                 if (isIE) {
-                  alert("IE");
+                  // alert("IE");
                   script.onreadystatechange = function() {
                     if (this.readyState == "loaded" || this.readyState == "complete") {
-                      callback();
+                      // callback();
                     }
                   };
                 } else {
                   // IE9及以上浏览器，Firefox，Chrome，Opera
                   script.onload = function() {
-                    callback();
+                    // callback();
                   };
                 }
                 document.body.appendChild(script)

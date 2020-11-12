@@ -1,3 +1,7 @@
+# 项目介绍
+* p1是移动端项目
+* p2是pc端项目
+
 # test
 
 > A Vue.js project

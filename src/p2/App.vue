@@ -2,17 +2,17 @@
   <div id="app">
     <div class="logo"></div>
     <div class="nav">
-      <div class="nav-icon">
+      <div class="menuIcon">
       </div>
-      <div class="nav-body">
-        <div v-for="item in nav" :key="item.id">
-            <div class="supmenu">
+      <div class="supmenu">
+        <div class="supmenuItem" v-for="item in nav" :key="item.id">
+            <div class="suppermenuName">
               {{item.suppermenuName}}
             </div>
           </div>
       </div>
-      <div class="submenu" >
-        <div v-for="item in submenu" :key="item.id">
+      <div class="submenu">
+        <div class="submenuItem" v-for="item in submenu" :key="item.id">
           <div class="projectType">item.typeName</div>
           <div v-for="it in item.projectLit" :key="it.id">
               {{it.name}}

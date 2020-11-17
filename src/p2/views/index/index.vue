@@ -1,12 +1,14 @@
 <template>
   <div class="index-wrap">
-      <div class="imgWrap" v-infinite-scroll="load" style="overflow:auto;height:100vh">
+    <el-scrollbar :native="false" wrapStyle="" wrapClass="scrollbar-wrap"  viewStyle="" >
+      <!-- <div class="imgWrap" v-infinite-scroll="load" style="overflow:auto;height:100vh">
           <el-image v-for="url in imgList" :key="url" :src="url">
             <div slot="error" class="image-slot">
               <i class="el-icon-picture-outline"></i>
             </div>
           </el-image>
-      </div>
+      </div> -->
+      </el-scrollbar>
   </div>
 </template>
 
@@ -33,9 +35,17 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .index-wrap{
-  
+  /deep/ .el-scrollbar__thumb{
+      background-color: red;
+    }
+   .el-scrollbar{
+    height: 100vh;
+    .scrollbar-wrap{
+      overflow-x: hidden;
+    }
+  }
 }
 .el-image{
   width: 100%;

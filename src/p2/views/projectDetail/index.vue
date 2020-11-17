@@ -1,8 +1,8 @@
 <template>
   <div class="detail-wrap">
-     <el-scrollbar :native="false" wrapStyle="" wrapClass="scrollbar-wrap"  viewStyle="" >
+     <el-scrollbar :native="false" wrapStyle="" wrapClass="scrollbar-wrap"  viewClass="scrollbar-view" >
         <div class="imgWrap">
-            <el-image v-for="url in detail.imgurl" :key="url" :src="url">
+            <el-image v-for="url in detail.imgurl" :key="url" :src="url" :style="drawer?imgWidht:''">
               <div slot="error" class="image-slot">
                 <i class="el-icon-picture-outline"></i>
               </div>
@@ -11,14 +11,20 @@
       </el-scrollbar>
       <!-- TODO -->
       <div class="fixed-title" @click="openDrawer">{{detail.name}}</div>
-      <el-drawer
-        :visible.sync="drawer"
-        :with-header="false"
-        size="300"
-        >
-        <span>{{detail.name}}</span>
-        <i class="el-icon-close" @click="close"/>
-      </el-drawer>
+      <div class="drawer" v-show="drawer"> 
+          <div class="drawer-title">
+            <span>{{detail.name}}</span>
+            <i class="el-icon-close" @click="close"/> 
+          </div>
+          <el-scrollbar :native="false" wrapStyle=""  viewStyle="" style="height:100vh">
+          <div class="abc"></div>
+          <div class="abc"></div>
+          <div class="abc"></div>
+          <div class="abc"></div>
+          <div class="abc"></div>
+          <div class="abc"></div>
+        </el-scrollbar>
+      </div>
   </div>
 </template>
 
@@ -26,6 +32,9 @@
 export default {
   data() {
     return {
+      imgWidht: {
+        width: '70vw'
+      },
       id: '',
       detail: {
         id: '', // 项目id
@@ -71,14 +80,24 @@ export default {
   /deep/ .el-scrollbar__thumb{
       background-color: red;
     }
-  .el-scrollbar{
-    height: 100vh;
-    .scrollbar-wrap{
+   
+   .el-scrollbar{
+      height: 100vh;
       overflow-x: hidden;
-    }
+      .scrollbar-wrap{
+       
+      }
+      
+  }
+  /deep/ .el-scrollbar__wrap{
+    overflow-x: hidden;
+  }
+  /deep/ .scrollbar-view{
+    display: flex;
   }
   
   .imgWrap{
+    flex: 1;
     font-size: 0;
     /deep/ .el-image{
       width: 100%;
@@ -89,8 +108,26 @@ export default {
   }
   .fixed-title{
       position: fixed;
-      right: 100px;
+      width: 30%;
+      right: 0;
       bottom: 100px;
+    }
+    .drawer{
+      width: 30%;
+      height: 100vh;
+      position: fixed;
+      right: 0;
+      left: 70%;
+      top: 0;
+      bottom: 0;
+      // overflow-x:hidden;
+      // overflow-y:auto;
+    }
+    .abc{
+      height: 300px;
+      width: 100%;
+      margin-bottom: 10px;
+      background: saddlebrown;
     }
 }
 

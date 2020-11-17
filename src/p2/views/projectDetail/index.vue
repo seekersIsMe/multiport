@@ -1,21 +1,23 @@
 <template>
   <div class="detail-wrap">
      <el-scrollbar :native="false" wrapStyle="" wrapClass="scrollbar-wrap"  viewStyle="" >
-        <!-- <div class="imgWrap">
+        <div class="imgWrap">
             <el-image v-for="url in detail.imgurl" :key="url" :src="url">
               <div slot="error" class="image-slot">
                 <i class="el-icon-picture-outline"></i>
               </div>
             </el-image>
-        </div> -->
+        </div>
       </el-scrollbar>
       <!-- TODO -->
       <div class="fixed-title" @click="openDrawer">{{detail.name}}</div>
       <el-drawer
         :visible.sync="drawer"
-        :with-header="false">
+        :with-header="false"
+        size="300"
+        >
         <span>{{detail.name}}</span>
-        <i class="el-icon-close"/>
+        <i class="el-icon-close" @click="close"/>
       </el-drawer>
   </div>
 </template>
@@ -54,6 +56,9 @@ export default {
     },
     openDrawer() {
       this.drawer = true
+    },
+    close() {
+      this.drawer = false
     }
   }
 }
@@ -72,17 +77,22 @@ export default {
       overflow-x: hidden;
     }
   }
+  
+  .imgWrap{
+    font-size: 0;
+    /deep/ .el-image{
+      width: 100%;
+    }
+  }
+  .imgWrap img{
+    width: 100vw;
+  }
+  .fixed-title{
+      position: fixed;
+      right: 100px;
+      bottom: 100px;
+    }
 }
 
-el-image{
-  width: 100%;
-  /* display: block; */
-}
-.imgWrap{
-  font-size: 0;
-}
-.imgWrap img{
-  width: 100vw;
-  /* display: block; */
-}
+
 </style>

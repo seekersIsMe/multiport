@@ -9,21 +9,20 @@
             </el-image>
         </div>
       </el-scrollbar>
-      <!-- TODO -->
-      <div class="fixed-title" @click="openDrawer">{{detail.name}}</div>
-      <div class="drawer" v-show="drawer"> 
+      <div class="fixed-title" ref="fixed-title" @click="openDrawer">{{detail.name}}</div>
+      <div class="drawer" ref="drawer"> 
           <div class="drawer-title">
-            <span>{{detail.name}}</span>
+            <!-- <span>{{detail.name}}</span> -->
             <i class="el-icon-close" @click="close"/> 
           </div>
           <el-scrollbar :native="false" wrapStyle=""  viewStyle="" style="height:100vh">
-          <div class="abc"></div>
-          <div class="abc"></div>
-          <div class="abc"></div>
-          <div class="abc"></div>
-          <div class="abc"></div>
-          <div class="abc"></div>
-        </el-scrollbar>
+            <div class="abc"></div>
+            <div class="abc"></div>
+            <div class="abc"></div>
+            <div class="abc"></div>
+            <div class="abc"></div>
+            <div class="abc"></div>
+          </el-scrollbar>
       </div>
   </div>
 </template>
@@ -55,20 +54,56 @@ export default {
     }
   },
   created(){
-    let id = this.$route.query.id || ''
-    this.id = id
-    this.getDetail()
+    this.init()
+    this.$bus.$on('close', (res) => { 
+      if(this.drawer) {
+        this.close()
+      }
+    })
   },
   methods: {
+    init() {
+      let id = this.$route.query.id || ''
+      this.id = id
+      this.drawer = false
+      this.getDetail()
+    },
     getDetail() {
 
     },
     openDrawer() {
       this.drawer = true
+      this.$Velocity(this.$refs['fixed-title'],{
+        bottom: function() {
+          return document.body.clientHeight - 30
+        },
+        right: '30px',
+      }, {
+        duration: 450,
+      })
+      this.$Velocity(this.$refs['drawer'], "fadeIn" ,{
+        display: 'block',
+      }, {
+        duration: 450,
+      })
+      
     },
     close() {
       this.drawer = false
+      this.$Velocity(this.$refs['fixed-title'], 'reverse', {
+        duration: 500
+      })
+      this.$Velocity(this.$refs['drawer'], 'reverse', {
+        duration: 500
+      })
     }
+  },
+  watch: {
+      '$route'(to,from) {
+          console.log(this)
+          this.init()
+          this.$forceUpdate()
+      }
   }
 }
 </script>
@@ -107,29 +142,38 @@ export default {
     width: 100vw;
   }
   .fixed-title{
-      position: fixed;
-      width: 30%;
-      right: 0;
-      bottom: 100px;
+    position: fixed;
+    right: 0;
+    left: 70%;
+    bottom: 100px;
+    height: 30px;
+    line-height: 30px;
+    color: black;
+    font-weight: bold;
+    z-index: 3;
+  }
+  .drawer{
+    height: 100vh;
+    position: fixed;
+    right: 0;
+    left: 70%;
+    top: 0;
+    bottom: 0;
+    display: none;
+    // overflow-x:hidden;
+    // overflow-y:auto;
+  }
+  .abc{
+    height: 300px;
+    width: 100%;
+    margin-bottom: 10px;
+    background: saddlebrown;
+  }
+  .drawer-title{
+    text-align: right;
+    i{
+      display: inline;
     }
-    .drawer{
-      width: 30%;
-      height: 100vh;
-      position: fixed;
-      right: 0;
-      left: 70%;
-      top: 0;
-      bottom: 0;
-      // overflow-x:hidden;
-      // overflow-y:auto;
-    }
-    .abc{
-      height: 300px;
-      width: 100%;
-      margin-bottom: 10px;
-      background: saddlebrown;
-    }
+  }
 }
-
-
 </style>

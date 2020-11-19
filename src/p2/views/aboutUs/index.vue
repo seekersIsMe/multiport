@@ -83,11 +83,13 @@ export default {
     padding: 100px 40px 40px 0;
     display: flex;
     box-sizing: border-box;
+    height: 100vh;
+    overflow: hidden;
     .el-image{
       width: 100%;
     }
     .left{
-      flex: 0 0 70%;
+      flex: 0 0 80%;
       .img-text{
         position: relative;
         font-size: 0;

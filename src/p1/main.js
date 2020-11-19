@@ -3,17 +3,27 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import Vant from 'vant';
+// import Vant from 'vant';
 import 'vant/lib/index.css';
-
-Vue.use(Vant); 
-
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+import i18n from '../i18n'
+const Velocity = require("velocity-animate/velocity.js");
+require("velocity-animate/velocity.ui.js");
+import BUS from '../util/bus'
+BUS(Vue)  
+Vue.prototype.$Velocity = Velocity
+// Vue.use(Vant); 
+Vue.use(ElementUI)
+// Vue.use(Animated)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  i18n,
   components: { App },
   template: '<App/>'
 })
+

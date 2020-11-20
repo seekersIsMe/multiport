@@ -1,6 +1,6 @@
 <template>
   <div class="detail-wrap">
-     <el-scrollbar :native="false" wrapStyle="" wrapClass="scrollbar-wrap"  viewClass="scrollbar-view" >
+     <scroll :data="detail.imgurl" :listenScroll="true" :probeType="3" class="listView" ref="listView" @scroll="onListViewMove">
         <div class="imgWrap">
             <el-image v-for="url in detail.imgurl" :key="url" :src="url" :style="drawer?imgWidht:''">
               <div slot="error" class="image-slot">
@@ -8,7 +8,7 @@
               </div>
             </el-image>
         </div>
-      </el-scrollbar>
+      </scroll>
       <div class="fixed-title" ref="fixed-title" @click="openDrawer">{{detail.name}}</div>
       <div class="drawer" ref="drawer"> 
           <div class="drawer-title">
@@ -28,7 +28,11 @@
 </template>
 
 <script>
+import scroll from '@/components/scroll'
 export default {
+  components: {
+    scroll
+  },
   data() {
     return {
       imgWidht: {
@@ -68,6 +72,7 @@ export default {
       this.drawer = false
       this.getDetail()
     },
+    onListViewMove() {},
     getDetail() {
 
     },
@@ -110,8 +115,10 @@ export default {
 
 <style lang="less" scoped>
 .detail-wrap{
-  // height: 100vh;
-  // overflow: hidden;
+  .listView{
+    height: 100vh;
+    overflow: hidden;
+  }
   /deep/ .el-scrollbar__thumb{
       background-color: red;
     }

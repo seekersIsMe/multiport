@@ -1,18 +1,19 @@
 <template>
   <div class="index-wrap">
-    <el-scrollbar :native="false" wrapStyle="" wrapClass="scrollbar-wrap"  viewStyle="" >
-      <!-- <div class="imgWrap" v-infinite-scroll="load" style="overflow:auto;height:100vh">
+    <scroll :data="imgList" :listenScroll="true" :probeType="3" class="listView" ref="listView" @scroll="onListViewMove">
+      <div class="imgWrap">
           <el-image v-for="url in imgList" :key="url" :src="url">
             <div slot="error" class="image-slot">
               <i class="el-icon-picture-outline"></i>
             </div>
           </el-image>
-      </div> -->
-      </el-scrollbar>
+      </div>
+      </scroll>
   </div>
 </template>
 
 <script>
+import scroll from '@/components/scroll'
 export default {
   data() {
     return {
@@ -27,8 +28,13 @@ export default {
       ]
     }
   },
+  components: {
+    scroll
+  },
+   mounted() { 
+    },
   methods: {
-    load () {
+    onListViewMove (e) {
       this.imgList.push('https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg'+ '?t=' + new Date().getTime())
     }
   }
@@ -37,14 +43,10 @@ export default {
 
 <style scoped lang="less">
 .index-wrap{
-  /deep/ .el-scrollbar__thumb{
-      background-color: red;
-    }
-   .el-scrollbar{
+  height: 100vh;
+  .listView{
     height: 100vh;
-    .scrollbar-wrap{
-      overflow-x: hidden;
-    }
+    overflow: hidden;
   }
 }
 .el-image{

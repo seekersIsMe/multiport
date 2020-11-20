@@ -17,12 +17,14 @@
       </transition>
       <transition name="slide-fade">
         <div class="submenu" v-show="isShowSub">
-          <div class="submenuItem" v-for="item in submenu" :key="item.id">
-            <div class="projectType">{{item.typeName}}</div>
-            <div v-for="it in item.projectLit" :key="it.id" @click="gotoProjectDetail(it)">
-                {{it.name}}
-            </div>
-          </div>
+            <scroll v-for="item in submenu" :key="item.id" :data="item.projectLit" :listenScroll="true" :probeType="3" class="submenuItem listView" ref="listView" @scroll="onListViewMove(item)">
+              <div>
+                  <div class="projectType">{{item.typeName}}</div>
+                  <div v-for="it in item.projectLit" :key="it.id" @click="gotoProjectDetail(it)">
+                    {{it.name}}
+                  </div>
+              </div>
+            </scroll>
         </div>
       </transition>
     </div>
@@ -62,8 +64,12 @@ const LANG = {
   'ch': '中',
   'en': 'en'
 }
+import scroll from '@/components/scroll'
 export default {
   name: 'App',
+  components: {
+    scroll
+  },
   data() {
     return {
       isShowSub: false,
@@ -202,6 +208,9 @@ export default {
      this.restaurants = this.loadAll();
   },
   methods: {
+    onListViewMove() {
+      // debugger
+    },
     showSup() {
       this.isShowSup = !this.isShowSup
       this.isShowSub = false
@@ -328,7 +337,7 @@ export default {
 
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 #app{
   position: relative;
   .logo{
@@ -431,6 +440,9 @@ export default {
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 9;
+  }
+  .listView{
+    height: calc(100vh - 240px);
   }
 }
 </style>

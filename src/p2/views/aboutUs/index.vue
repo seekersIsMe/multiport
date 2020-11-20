@@ -7,21 +7,36 @@
             <i class="el-icon-picture-outline"></i>
           </div>
         </el-image>
-        <div class="aboutus-text">
+        <div class="aboutus-text" v-show="currentIndex === 0">
           <div class="title">
             {{ detail.name }}
           </div>
           {{ detail.describe }}
         </div>
+        <!-- TODO -->
+        <div class="members-wrap" v-show="currentIndex === 1">
+          <div class="members-text">
+            <div class="members-item" v-for="(item, index) in members" :key="index">
+              <div class="title">
+                {{item.title}}
+              </div>
+              <div class="person-item"  v-for="(it, i) in item.list" :key="i" @click="selectPerson(it)">
+                {{it.name}}
+              </div>
+            </div>
+          </div>
+          <div class="introduce-text">
+            {{currentIndex}}
+          </div>
       </div>
     </div>
     <div class="right">
       <div class="aboutus-img-wrap">
         <el-image
-          v-for="url in detail.imgurl.slice(0, 3)"
+          v-for="(url, index) in detail.imgurl.slice(0, 3)"
           :key="url"
           :src="url"
-          @click="selectImg(url)"
+          @click="selectImg(url, index)"
         >
           <div slot="error" class="image-slot">
             <i class="el-icon-picture-outline"></i>
@@ -65,14 +80,47 @@ export default {
           'https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg',
           'https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg',
           'https://fuss10.elemecdn.com/0/6f/e35ff375812e6b0020b6b4e8f9583jpeg.jpeg'
-          ]
+          ],
+        members: [
+          {
+            title: '合伙人',
+            list: [
+              {
+              name: '中国合伙人1',
+              introduce: '这是一个牛逼的合伙人'
+              },
+              {
+              name: '中国合伙人2',
+              introduce: '这是一个牛逼的合伙人'
+              }
+            ]
+          },
+          {
+            title: '高级设计师',
+            list: [
+              {
+              name: '高级设计师1',
+              introduce: '这是一个牛逼的高级设计师'
+              },
+              {
+              name: '高级设计师2',
+              introduce: '这是一个牛逼的高级设计师'
+              }
+            ]
+          }
+        ]
       },
-      currentImgUrl: 'https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg'
+      currentImgUrl: 'https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg',
+      currentIndex: 0
     };
   },
   methods: {
-    selectImg(url){
+    selectImg(url, index){
       this.currentImgUrl = url
+      this.currentIndex = index
+    },
+    selectPerson(item) {
+      this.personText = item.introduce
     }
   }
 };

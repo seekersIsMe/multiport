@@ -15,14 +15,16 @@
             <!-- <span>{{detail.name}}</span> -->
             <i class="el-icon-close" @click="close"/> 
           </div>
-          <el-scrollbar :native="false" wrapStyle=""  viewStyle="" style="height:100vh">
-            <div class="abc"></div>
-            <div class="abc"></div>
-            <div class="abc"></div>
-            <div class="abc"></div>
-            <div class="abc"></div>
-            <div class="abc"></div>
-          </el-scrollbar>
+           <scroll :listenScroll="true" :probeType="3" class="listView">
+             <div>
+                <div class="abc"></div>
+                <div class="abc"></div>
+                <div class="abc"></div>
+                <div class="abc"></div>
+                <div class="abc"></div>
+                <div class="abc"></div>
+             </div>
+          </scroll>
       </div>
   </div>
 </template>
@@ -77,6 +79,9 @@ export default {
 
     },
     openDrawer() {
+      if(this.drawer) {
+        return
+      }
       this.drawer = true
       this.$Velocity(this.$refs['fixed-title'],{
         bottom: function() {
@@ -167,6 +172,7 @@ export default {
     top: 0;
     bottom: 0;
     display: none;
+    overflow: hidden;
     // overflow-x:hidden;
     // overflow-y:auto;
   }

@@ -10,7 +10,7 @@
         <div class="supmenu" v-show="isShowSup" >
           <div class="supmenuItem" :class="index === activeIndex ? 'active' : ''" v-for="(item,index) in nav" :key="item.id" @click="selectSupMenu(index)">
               <div class="suppermenuName">
-                {{item.suppermenuName}}
+                {{isCH?item.suppermenuName:item.e_suppermenuName}}
               </div>
             </div>
         </div>
@@ -19,7 +19,7 @@
         <div class="submenu" v-show="isShowSub">
             <scroll v-for="item in submenu" :key="item.id" :data="item.projectLit" :listenScroll="true" :probeType="3" class="submenuItem listView" ref="listView" @scroll="onListViewMove(item)">
               <div>
-                  <div class="projectType">{{item.typeName}}</div>
+                  <div class="projectType">{{isCH?item.typeName:item.e_typeName}}</div>
                   <div v-for="it in item.projectLit" :key="it.id" @click="gotoProjectDetail(it)">
                     {{it.name}}
                   </div>
@@ -78,130 +78,78 @@ export default {
       submenu: [],
       nav: [
         {
-          suppermenuName: '出版项目',
+          suppermenuName: '项目',
+          e_suppermenuName:'PROJECTS',
           id: '1',
           submenu: [
             {
-              typeName: '出版项目类型1',
-              projectLit: [
-                {
-                  id: '1',
-                  name: '出版项目类型1_1'
-                },
-                {
-                  id: '2',
-                  name: '出版项目类型1_2'
-                },
-                {
-                  id: '3',
-                  name: '出版项目类型1_3'
-                }
-              ]
-            },
-             {
-              typeName: '出版项目类型2',
-              projectLit: [
-                {
-                  id: '1',
-                  name: '出版项目类型2_1'
-                },
-                 {
-                  id: '2',
-                  name: '出版项目类型2_2'
-                },
-                 {
-                  id: '3',
-                  name: '出版项目类型2_3'
-                }
-              ]
-            },
-             {
-              typeName: '出版项目类型3',
-              projectLit: [
-                 {
-                  id: '1',
-                  name: '出版项目类型3_1'
-                },
-                 {
-                  id: '2',
-                  name: '出版项目类型3_2'
-                },
-                 {
-                  id: '3',
-                  name: '出版项目类型3_3'
-                }
-              ]
+              typeName: '建筑',
+              e_typeName: 'ARCHITECTURE',
+              projectLit: []
+            }, 
+            {
+              typeName: '改造',
+              e_typeName: 'RENOVATION',
+              projectLit: []
+            }, 
+            {
+              typeName: '城乡研究',
+              e_typeName: 'Urban & rural research',
+              projectLit: []
             }
           ]
         },
         {
-          suppermenuName: '设计项目',
+          suppermenuName: '展览&演讲',
+          e_suppermenuName:'EXHIBITION&LECTURE',
           id: '2',
           submenu: [
             {
-              typeName: '设计项目类型1',
-              projectLit: [
-                {
-                  id: '1',
-                  name: '设计项目类型1_1'
-                },
-                {
-                  id: '2',
-                  name: '设计项目类型1_2'
-                },
-                {
-                  id: '3',
-                  name: '设计项目类型1_3'
-                }
-              ]
-            },
-             {
-              typeName: '设计项目类型2',
-              projectLit: [
-                {
-                  id: '1',
-                  name: '设计项目类型2_1'
-                },
-                 {
-                  id: '2',
-                  name: '设计项目类型2_2'
-                },
-                 {
-                  id: '3',
-                  name: '设计项目类型2_3'
-                }
-              ]
-            },
-             {
-              typeName: '设计项目类型3',
-              projectLit: [
-                 {
-                  id: '1',
-                  name: '设计项目类型3_1'
-                },
-                 {
-                  id: '2',
-                  name: '设计项目类型3_2'
-                },
-                 {
-                  id: '3',
-                  name: '设计项目类型3_3'
-                }
-              ]
+              typeName: '展览',
+              e_typeName: 'exhibition',
+              projectLit: []
+            }, 
+            {
+              typeName: '演讲',
+              e_typeName: 'lecture',
+              projectLit: []
+            }
+          ]
+        },
+         {
+          suppermenuName: '出版',
+          e_suppermenuName:'PUBLICATION',
+          id: '3',
+          submenu: [
+            {
+              typeName: '书籍出版',
+              e_typeName: 'book',
+              projectLit: []
+            }, 
+            {
+              typeName: '国内刊物',
+              e_typeName: 'domestic',
+              projectLit: []
+            }, 
+            {
+              typeName: '国际刊物',
+              e_typeName: 'international',
+              projectLit: []
             }
           ]
         },
         {
           suppermenuName: '关于我们',
           isAbout: true,
-          id: '3'
+          id: '4'
         }
       ],
       restaurants: [],
       state: '',
       timeout:  null,
       isShowSearch: false,
-      langText: '中'
+      langText: '中',
+      isCH: true
     }
   },
   mounted() {
@@ -219,6 +167,7 @@ export default {
       this.activeIndex = index;
       let item = this.nav[index]
       if(!item.isAbout) {
+        this.submenu = this.nav[index].submenu
         this.submenu = this.nav[index].submenu
         this.isShowSub = true
       } else {
@@ -244,6 +193,7 @@ export default {
     selectLang(e) {
       console.log(e)
       this.langText = LANG[e]
+      this.isCH = e === 'ch'
       this.$bus.$emit('changeLang', e)
       localStorage.setItem('langType', e)
       this.$i18n.locale = e
@@ -424,7 +374,7 @@ export default {
     bottom: 10px;
     right: 0;
     height: 30px;
-    width: 60px;
+    width: 80px;
     align-items: center;
     line-height: 30px;
     justify-content: space-between;

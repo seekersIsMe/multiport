@@ -1,43 +1,45 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import aboutUs from '../views/aboutUs'
-import index from '../views/index'
-import projectDetail from '../views/projectDetail'
+import Vue from "vue";
+import Router from "vue-router";
+const aboutUs = () =>
+  import(/* webpackChunkName: "aboutUs" */ "../views/aboutUs");
+const index = () => import(/* webpackChunkName: "index" */ "../views/index");
+const projectDetail = () =>
+  import(/* webpackChunkName: "projectDetail" */ "../views/projectDetail");
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   routes: [
     {
-      path: '*',
+      path: "*",
       component: index,
       meta: {
-        title: '首页'
-      }
+        title: "首页",
+      },
     },
     {
-      path: '/',
-      name: 'index',
+      path: "/",
+      name: "index",
       component: index,
       meta: {
-        title: '首页'
-      }
+        title: "首页",
+      },
     },
     {
-      path: '/aboutUs',
-      name: 'aboutUs',
+      path: "/aboutUs",
+      name: "aboutUs",
       component: aboutUs,
       meta: {
-        title: '关于我们'
-      }
+        title: "关于我们",
+      },
     },
     {
-      path: '/projectDetail',
-      name: 'projectDetail',
+      path: "/projectDetail",
+      name: "projectDetail",
       component: projectDetail,
       meta: {
-        title: '项目详情'
-      }
+        title: "项目详情",
+      },
     },
-  ]
-})
+  ],
+});

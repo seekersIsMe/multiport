@@ -1,30 +1,26 @@
 <template>
   <div id="app">
-    <div class="logo">
-     我是logo
-    </div>
+    <div class="logo">我是logo</div>
     <div class="lang">
-        <el-dropdown placement="top" trigger="click" @command="selectLang">
-              <span class="el-dropdown-link">
-              {{langText}}<i class="el-icon-arrow-down el-icon--right"></i>
-              </span>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item command="ch">中</el-dropdown-item>
-                <el-dropdown-item command="en">en</el-dropdown-item>
-              </el-dropdown-menu>
-        </el-dropdown>
-      </div>
-      <div class="aboutUs-icon" @click="gotoAboutus">
-        <i class="el-icon-help"></i>
-      </div>
-    <router-view/>
+      <el-dropdown placement="top" trigger="click" @command="selectLang">
+        <span class="el-dropdown-link"> {{ langText }}<i class="el-icon-arrow-down el-icon--right"></i> </span>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item command="ch">中</el-dropdown-item>
+          <el-dropdown-item command="en">en</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+    </div>
+    <div class="aboutUs-icon" @click="gotoAboutus">
+      <i class="el-icon-help"></i>
+    </div>
+    <router-view />
   </div>
 </template>
 
 <script>
 const LANG = {
-  'ch': '中',
-  'en': 'en'
+  ch: '中',
+  en: 'en'
 }
 export default {
   name: 'App',
@@ -42,7 +38,7 @@ export default {
       this.$i18n.locale = e
     },
     gotoAboutus() {
-      if(this.$route.path !== '/aboutUs') {
+      if (this.$route.path !== '/aboutUs') {
         this.$router.push({
           path: '/aboutUs'
         })
@@ -54,22 +50,22 @@ export default {
 
 <style lang="less">
 #app {
-  .logo{
+  .logo {
     position: fixed;
-    top:10px;
+    top: 10px;
     left: 50%;
-    transform: translateX(-50%); 
+    transform: translateX(-50%);
     z-index: 9;
   }
-  .lang{
+  .lang {
     position: fixed;
     right: 10px;
     top: 10px;
     z-index: 9;
   }
-  .aboutUs-icon{
+  .aboutUs-icon {
     position: fixed;
-    left:  10px;
+    left: 10px;
     bottom: 10px;
     width: 30px;
     height: 30px;

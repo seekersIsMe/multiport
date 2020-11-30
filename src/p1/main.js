@@ -8,9 +8,9 @@ import 'vant/lib/index.css'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import i18n from '../i18n'
+import BUS from '../util/bus'
 const Velocity = require('velocity-animate/velocity.js')
 require('velocity-animate/velocity.ui.js')
-import BUS from '../util/bus'
 BUS(Vue)
 Vue.prototype.$Velocity = Velocity
 // Vue.use(Vant);

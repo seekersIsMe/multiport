@@ -2,6 +2,9 @@
 * p1是移动端项目
 * p2是pc端项目
 
+# 全部文件自动格式化：
+https://blog.csdn.net/csdn_yudong/article/details/106884274
+
 # test
 
 > A Vue.js project

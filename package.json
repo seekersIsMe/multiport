@@ -80,11 +80,11 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "prettier --write 'src/**/*.{js,jsx,json,css}' && git add"
     }
   },
   "lint-staged": {
-    "*.vue": [
+    "*.{js,json,css,md,vue}": [
       "prettier --write",
       "git add"
     ]

@@ -71,9 +71,6 @@ export default {
   },
   methods: {
     init() {
-      if (true) {
-        console.log(1)
-      }
       let id = this.$route.query.id || ''
       this.id = id
       this.drawer = false

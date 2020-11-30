@@ -71,11 +71,11 @@
 </template>
 
 <script>
+import scroll from '@/components/scroll'
 const LANG = {
   ch: '中',
   en: 'en'
 }
-import scroll from '@/components/scroll'
 export default {
   name: 'App',
   components: {

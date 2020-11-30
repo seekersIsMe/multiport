@@ -3,6 +3,7 @@ module.exports = {
     singleQuote: true,
     semi: false,
     bracketSpacing: false,
-    trailingComma: 'none'
+    trailingComma: 'none',
+    'spaced-comment': 'always'
   }
   

@@ -28,7 +28,7 @@ export default {
     }
   },
   mounted() {
-    //其实这里做延时也不一定保证dom完全渲染
+    // 其实这里做延时也不一定保证dom完全渲染
     setTimeout(() => {
       this.$nextTick(() => {
         this.refreshScroll()
@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     initScroll() {
-      //这里需要做下判断，有可能this.$refs.scroll还没有渲染出来
+      // 这里需要做下判断，有可能this.$refs.scroll还没有渲染出来
       if (!this.$refs.scroll) {
         return
       }
@@ -61,7 +61,7 @@ export default {
         this.scroll.refresh()
       }
     },
-    //将better-scroll的scrollTo和scrollToElement两个方法添加到该组件上，方便在外层组件中调用
+    // 将better-scroll的scrollTo和scrollToElement两个方法添加到该组件上，方便在外层组件中调用
     scrollTo() {
       this.scroll && this.scroll.scrollTo.apply(this.scroll, arguments)
     },

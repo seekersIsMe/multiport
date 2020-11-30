@@ -38,6 +38,6 @@ export default new Router({
       meta: {
         title: '项目详情'
       }
-    },
+    }
   ]
 })

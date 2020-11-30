@@ -78,17 +78,7 @@
     "node": ">= 6.0.0",
     "npm": ">= 3.0.0"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "prettier --write 'src/**/*.{js,jsx,json,css}' && git add"
-    }
-  },
-  "lint-staged": {
-    "*.{js,json,css,md,vue}": [
-      "prettier --write",
-      "git add"
-    ]
-  },
+  
   "browserslist": [
     "> 1%",
     "last 2 versions",
